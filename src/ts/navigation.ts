@@ -28,7 +28,7 @@ function closeMenu() {
     navMenu.style.display = "none";
 }
 
-//Events
+//Events mobile
 navButton.addEventListener('click', () => {
     if (navButton.ariaExpanded === "false") {
 
@@ -43,4 +43,23 @@ navButton.addEventListener('click', () => {
 
 navBackground.addEventListener('click', () => {
     closeMenu()
+})
+
+//Events Desktop
+
+window.addEventListener('load', ()=> {
+    
+    if (window.innerWidth > 600) {
+        navMenu.style.display = "flex" 
+    }
+    
+})
+
+//Resize Events 
+window.addEventListener('resize', ()=> {
+    closeMenu()
+    if (window.innerWidth > 600) {
+        navMenu.style.display = "flex"
+        navButton.ariaExpanded = "true"
+    } 
 })
