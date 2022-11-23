@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/favicon-32x32.png" type="image/x-icon">
     <link rel="stylesheet" href="scss/styles.scss">
-    <script src="ts/script.ts" defer></script>
+    <script type="module" src="ts/script.ts" defer></script>
     <title>Crowdfunding Product Page</title>
 </head>
 <body>
-    <span class="modal-background"></span>
+    <!-- navigation background -->
+    <span class="modal-background" id="modal-background" ></span>
+    <!-- use a diferent backgroun for the modals -->
     <header class="header">
-        <nav class="nav">
+        <nav class="nav" role="navigation">
             <figure class="nav__logo-container">
                 <img src="images/logo.svg" alt="Crowdfund logo" class="nav__logo-img">
             </figure>
-            <menu class="nav__list">
+            <menu id="nav-menu" class="nav__list">
                 <li class="nav__item">
                     <a class="nav__link" href="">About</a>
                 </li>
@@ -27,8 +29,8 @@
                     <a class="nav__link" href="">Get Started</a>
                 </li>
             </menu>
-            <button class="nav__button">
-                <img src="images/icon-hamburger.svg" alt="open menu" class="nav__button-img">
+            <button id="nav-button" class="nav__button" aria-expanded="false" aria-controls="nav-menu" aria-label="toggle navigation" data-open="false">
+                <img id="nav-button-img" src="images/icon-hamburger.svg"  class="nav__button-img" aria-hidden="true">
             </button>
         </nav>
     </header>
