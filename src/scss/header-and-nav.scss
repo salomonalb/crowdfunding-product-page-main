@@ -1,1 +1,35 @@
 @use './variables.scss' as *;
+
+.header {
+    background-image: url(../images/image-hero-mobile.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-inline: 6.4vw;//2.4rem
+    padding-top: min(9.6vw, 5.3rem);//3.6rem;
+    padding-bottom: 25rem;
+    @media(min-width: 600px) {
+        background-image: url(../images/image-hero-desktop.jpg);
+        background-size: cover;
+        padding-inline: min(11.5vw, 16.5rem);
+        padding-bottom: min(22.5vw, 32.5rem);
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo-img {
+        width: 12.8rem;
+    }
+    &__button-img {
+        width: 1.6rem;
+    }
+   
+
+    &__button {
+        border: none;
+        background-color: transparent;
+    }
+}
