@@ -1,0 +1,35 @@
+@use './variables.scss' as *;
+
+
+
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo-img {
+        width: 12.8rem;
+    }
+    &__button {
+        border: none;
+        background-color: transparent;
+        @media(min-width: $breakpoint) {
+            display: none;
+        }
+    }
+    &__button-img {
+        width: 1.6rem;
+    }
+    &__list {
+        display: flex;
+        list-style-type: none;
+        gap: 2.5rem;
+    }
+    &__link {
+        color: white;
+        text-decoration: none;
+        font-family: $font;
+        font-size: 1.5rem;
+    }
+}
