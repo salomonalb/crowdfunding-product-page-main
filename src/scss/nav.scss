@@ -8,11 +8,13 @@
 
     &__logo-img {
         width: 12.8rem;
+        cursor: pointer;
     }
     &__button {
         border: none;
         background-color: transparent;
         z-index: 20;
+        cursor: pointer;
         @media(min-width: $breakpoint) {
             display: none;
         }
@@ -22,7 +24,7 @@
     }
     &__list {
         background-color: white;
-        display: flex;
+        display: none;
         list-style-type: none;
         flex-direction: column;
         border-radius: .5rem;
