@@ -1,5 +1,69 @@
+@use './variables.scss' as *;
+
 .container {
     background-color: #fff;
     padding-block: 4rem;
     padding-inline: 2.4rem;
+    border: 1px solid darken($light-gray, 5%);
+    border-radius: 1rem;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    display: block;
+    margin: auto;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.text-primary {
+    font-family: $font;
+    text-align: center;
+    max-width: 18ch;
+    margin: auto;
+    font-size: 2rem;
+}
+
+.text-secondary {
+    font-family: $font;
+    text-align: center;
+    margin: auto;
+    color: $dark-gray;
+    font-size: 1.4rem;
+    margin-top: 3rem;
+}
+
+.row {
+    display: flex;
+    //align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    width: max-content;
+    margin-inline: auto;
+}
+
+.button {
+    padding-inline: 4.5rem;
+    padding-block: 2rem;
+    background-color: $moderate-cyan;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-family: $font;
+    border-radius: 50rem;
+    cursor: pointer;
+}
+
+.bookmark {
+    display: block;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &__icon {
+        display: block;
+        max-width: 100%;
+    }
 }
