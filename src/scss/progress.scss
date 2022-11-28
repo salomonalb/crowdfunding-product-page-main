@@ -1,0 +1,17 @@
+@use  './variables.scss' as *;
+
+.progress {
+
+    &__bar {
+        background-color: $light-gray;
+        height: 1rem;
+        border-radius: 50rem;
+    }
+
+    &__progress {
+        background-color: $moderate-cyan;
+        width: 22rem;
+        height: 1rem;
+        border-radius: 50rem;
+    }
+}
