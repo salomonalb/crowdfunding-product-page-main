@@ -1,0 +1,14 @@
+@use './variables.scss' as *; 
+
+body {
+    background-color: $light-gray ;
+}
+
+main {
+    padding-inline: 2.4rem;
+    padding-top: 3rem;
+    padding-bottom: 7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
