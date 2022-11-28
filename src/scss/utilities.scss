@@ -24,6 +24,14 @@
     max-width: 18ch;
     margin: auto;
     font-size: 2rem;
+    font-weight: bold;
+    
+    &--big {
+        @extend .text-primary;
+        font-size: 3.1rem;
+        max-width: max-content;
+        
+    }
 }
 
 .text-secondary {
@@ -33,6 +41,20 @@
     color: $dark-gray;
     font-size: 1.4rem;
     margin-top: 3rem;
+
+    .text-primary--big + & {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }  
+}
+
+.divider {
+    width: 8rem;
+    display: block;
+    background-color: darken($light-gray, 5%);
+    height: .1rem;
+    margin: auto;
+    margin-bottom: 2rem;
 }
 
 .row {
