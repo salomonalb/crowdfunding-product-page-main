@@ -8,3 +8,27 @@ $light-gray: hsl(0, 0%, 98%);
 $font: 'Commissioner', sans-serif;
 $breakpoint: 600px;
 $breakpoint2: 730px;
+
+%container {
+    background-color: #fff;
+    padding-block: min(10.6vw, 4.8rem);
+    padding-inline: min(6.4vw, 4.8rem) ;//2.4rem;
+    border: 1px solid darken($light-gray, 5%);
+    border-radius: 1rem;
+    position: relative;
+    width: min(86.6vw, 73rem);
+    margin: auto;
+}
+
+%button {
+    padding-inline: 4.5rem;
+    padding-block: 2rem;
+    background-color: $moderate-cyan;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-family: $font;
+    font-size: min(3.73vw, 1.65rem);
+    border-radius: 50rem;
+    cursor: pointer;
+}

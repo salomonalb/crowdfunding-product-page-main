@@ -1,26 +1,5 @@
 @use './variables.scss' as *;
 
-.container {
-    background-color: #fff;
-    padding-block: min(10.6vw, 4.8rem);
-    padding-inline: min(6.4vw, 4.8rem) ;//2.4rem;
-    border: 1px solid darken($light-gray, 5%);
-    border-radius: 1rem;
-    position: relative;
-    width: min(86.6vw, 73rem);
-    margin: auto;
-}
-
-.logo {
-    width: 5.7rem;
-    position: absolute;
-    display: block;
-    margin: auto;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
-
 .text-primary {
     font-family: $font;
     text-align: center;

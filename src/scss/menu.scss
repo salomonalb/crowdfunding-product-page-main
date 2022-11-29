@@ -1,0 +1,49 @@
+@use './variables.scss' as *;
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    width:100%;
+    margin-inline: auto;
+    @media(min-width: $breakpoint) {
+        justify-content: space-between;
+    }
+
+    &__button {
+        @extend %button;
+    }
+
+    &__bookmark {
+        display: block;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        @media(min-width: $breakpoint) {
+            display: flex;
+            align-items: center;
+            background-color: $light-gray;
+            border-radius: 50rem;
+            gap: 2rem;
+            padding-right: 2.5rem;
+        }
+    
+        &-icon {
+            display: block;
+            width: 5.7rem;
+            max-width: 100%;
+        }
+        &-text {
+            display: none;
+            @media(min-width: $breakpoint) {
+                display: block;
+                font-family: $font;
+                font-size: min(3.73vw, 1.65rem);
+                font-weight: bold;
+                color: $dark-gray;
+            }
+        }
+    }
+}

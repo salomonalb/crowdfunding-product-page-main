@@ -1,0 +1,31 @@
+@use './variables.scss' as *;
+
+.project-intro {
+    @extend %container;
+
+    &__logo {
+        width: 5.7rem;
+        position: absolute;
+        display: block;
+        margin: auto;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    &__title {
+        font-family: $font;
+        text-align: center;
+        margin: auto;
+        font-size: min(5.3vw, 2.82rem);
+        font-weight: bold;
+    }
+    &__description {
+        font-family: $font;
+        text-align: center;
+        margin: auto;
+        color: $dark-gray;
+        font-size: min(3.73vw, 1.65rem);//3.73vw
+        margin-top: 3rem;
+    }
+}
