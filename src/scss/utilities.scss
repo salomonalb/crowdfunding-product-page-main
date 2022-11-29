@@ -2,14 +2,17 @@
 
 .container {
     background-color: #fff;
-    padding-block: 4rem;
-    padding-inline: 2.4rem;
+    padding-block: min(10.6vw, 4.8rem);
+    padding-inline: min(6.4vw, 4.8rem) ;//2.4rem;
     border: 1px solid darken($light-gray, 5%);
     border-radius: 1rem;
     position: relative;
+    width: min(86.6vw, 73rem);
+    margin: auto;
 }
 
 .logo {
+    width: 5.7rem;
     position: absolute;
     display: block;
     margin: auto;
@@ -21,9 +24,9 @@
 .text-primary {
     font-family: $font;
     text-align: center;
-    max-width: 18ch;
+    //max-width: 18ch;
     margin: auto;
-    font-size: 2rem;
+    font-size: min(5.3vw, 2.82rem);
     font-weight: bold;
     
     &--big {
@@ -41,8 +44,9 @@
         @extend .text-primary;
         @extend .text-primary--left;
         width: max-content;
-        font-size: 1.42rem;
+        font-size: min(3.73vw, 1.9rem);
         margin-bottom: 1.5rem;
+        
     }
 }
 
@@ -51,7 +55,7 @@
     text-align: center;
     margin: auto;
     color: $dark-gray;
-    font-size: 1.4rem;
+    font-size: min(3.73vw, 1.65rem);//3.73vw
     margin-top: 3rem;
 
     &--left {
@@ -79,26 +83,108 @@
     height: .1rem;
     margin: auto;
     margin-bottom: 2rem;
+    @media(min-width: $breakpoint2) {
+        width: .1rem;
+        height: 8rem;
+        margin-inline:min(7.5vw, 4.5rem);
+    }
 }
 
 .row {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-top: 3rem;
-    width: max-content;
-    margin-inline: auto;
+    width:max-content;
+    //margin-inline: auto;
+    @media(min-width: $breakpoint) {
+        justify-content: space-between;
+        margin-top: 0;
+    }
 
     .text-secondary--left + & {
         margin-left: 0;
         margin-bottom: 3rem;
-
+    }
         p.text-secondary {
             max-width: max-content;
             max-height: max-content;
             margin:0;
         }
+    
+}
+
+.text-row {
+    display: flex;
+    flex-direction: column;
+
+    @media(min-width: $breakpoint) {
+        flex-direction: row;
+        justify-content: space-between;
+        & > * {
+            margin: 0;
+        }
     }
+}
+
+.card-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 3rem;
+    @media(min-width: $breakpoint) {
+        flex-direction: row;
+        margin-top: 3rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .button {
+        align-self: stretch;
+    }
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    width:100%;
+    margin-inline: auto;
+    @media(min-width: $breakpoint) {
+        justify-content: space-between;
+    }
+}
+
+.row-wrapper {
+    display: flex;
+    flex-direction: column;
+    @media(min-width: $breakpoint2) {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+.column {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    @media (min-width: $breakpoint2) {
+        & p.text-primary--big {
+            text-align: left;
+            margin: 0;
+            width: max-content;
+        }
+
+        &:nth-last-of-type(2) {
+            margin-right: min(7.5vw, 4.5rem);
+        }
+    }
+    
 }
 
 .button {
@@ -109,21 +195,12 @@
     color: white;
     font-weight: bold;
     font-family: $font;
+    font-size: min(3.73vw, 1.65rem);
     border-radius: 50rem;
     cursor: pointer;
 }
 
-.bookmark {
-    display: block;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
 
-    &__icon {
-        display: block;
-        max-width: 100%;
-    }
-}
 
 article {
     border: 1px solid darken($light-gray, 5%);
