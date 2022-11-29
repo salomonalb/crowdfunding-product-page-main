@@ -1,7 +1,9 @@
 @use  './variables.scss' as *;
 
 .progress {
-
+    &__container {
+        margin-top: 2rem;
+    }
     &__bar {
         background-color: $light-gray;
         height: 1rem;

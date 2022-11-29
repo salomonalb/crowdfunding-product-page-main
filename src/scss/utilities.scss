@@ -44,8 +44,9 @@
         @extend .text-primary;
         @extend .text-primary--left;
         width: max-content;
-        font-size: 1.42rem;
+        font-size: min(3.73vw, 1.9rem);
         margin-bottom: 1.5rem;
+        
     }
 }
 
@@ -92,24 +93,56 @@
 .row {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-top: 3rem;
-    width:100%;
-    margin-inline: auto;
+    width:max-content;
+    //margin-inline: auto;
     @media(min-width: $breakpoint) {
         justify-content: space-between;
+        margin-top: 0;
     }
 
     .text-secondary--left + & {
         margin-left: 0;
         margin-bottom: 3rem;
-
+    }
         p.text-secondary {
             max-width: max-content;
             max-height: max-content;
             margin:0;
         }
+    
+}
+
+.text-row {
+    display: flex;
+    flex-direction: column;
+
+    @media(min-width: $breakpoint) {
+        flex-direction: row;
+        justify-content: space-between;
+        & > * {
+            margin: 0;
+        }
+    }
+}
+
+.card-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 3rem;
+    @media(min-width: $breakpoint) {
+        flex-direction: row;
+        margin-top: 3rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .button {
+        align-self: stretch;
     }
 }
 
