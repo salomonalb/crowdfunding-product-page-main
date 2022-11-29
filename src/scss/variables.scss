@@ -32,3 +32,20 @@ $breakpoint2: 730px;
     border-radius: 50rem;
     cursor: pointer;
 }
+
+%text-primary {
+    font-family: $font;
+    text-align: center;
+    margin: auto;
+    font-size: min(5.3vw, 2.82rem);
+    font-weight: bold;
+}
+
+%text-secondary {
+    font-family: $font;
+    text-align: center;
+    margin: auto;
+    color: $dark-gray;
+    font-size: min(3.73vw, 1.65rem);
+    margin-top: 3rem;
+}
