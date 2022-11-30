@@ -1,0 +1,93 @@
+@use './variables.scss' as *;
+
+.reward {
+    border: 1px solid darken($light-gray, 5%);
+    border-radius: 1rem;
+    padding: 2.4rem;
+    margin-bottom: 2.4rem;
+
+    .project-about__description + & {
+        margin-top: 4rem;
+    }
+    
+    &__row-1 {
+        display: flex;
+        flex-direction: column;
+
+        @media(min-width: $breakpoint) {
+            flex-direction: row;
+            justify-content: space-between;
+                & > * {
+                    margin: 0;
+            }
+        }
+    }
+
+    &__title {
+        font-family: $font;
+        margin: auto;
+        font-weight: bold;
+        text-align: left;
+        margin-left: 0;
+        width: max-content;
+        font-size: min(3.73vw, 1.9rem);
+        margin-bottom: 1.5rem;
+    }
+    &__pledge {
+        font-family: $font;
+        margin: auto;
+        font-weight: bold;
+        text-align: left;
+        margin-left: 0;
+        width: max-content;
+        font-size: min(3.73vw, 1.9rem);
+        margin-bottom: 1.5rem;
+        color: $moderate-cyan;
+        font-weight: normal;
+        margin-right:0; 
+    }
+    &__description {
+        @extend %text-secondary;
+        text-align: left;
+        line-height: 1.5;
+    }
+    &__row-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 3rem;
+
+        @media(min-width: $breakpoint) {
+            flex-direction: row;
+            margin-top: 3rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &__row-3 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        margin-top: 3rem;
+        width:max-content;
+        @media(min-width: $breakpoint) {
+            justify-content: space-between;
+            margin-top: 0;
+        }
+    }
+    &__button {
+        @extend %button;
+        align-self: stretch;
+    }
+    &__number {
+        @extend %text-primary;
+        font-size: 3.1rem;
+        max-width: max-content;
+    }
+    &__text {
+        @extend %text-secondary;
+        margin: 0;
+    }
+}
