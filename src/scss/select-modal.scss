@@ -29,6 +29,7 @@
     &__description {
         @extend %text-secondary;
         text-align: left;
+        line-height: 1.5;
     }
     &__column {
         display: flex;
