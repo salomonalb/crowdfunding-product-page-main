@@ -1,7 +1,7 @@
 @use './variables.scss' as *;
 
 .select-reward {
-    border: 1px solid darken($light-gray, 5%);
+    border: .2rem solid darken($light-gray, 5%);
     border-radius: 1rem;
     padding: 2.4rem;
     position: relative;
@@ -22,7 +22,11 @@
     }
 
     &[data-selected="true"] {
-        padding-bottom: 10em;
+        padding-bottom: 17rem;
+        border-color: $moderate-cyan;
+        @media(min-width: $breakpoint2) {
+            padding-bottom: 14rem;
+        }
     }
 
     &__checkbox-container {
@@ -133,25 +137,64 @@
     }
     &__selected-menu {
         display: none;
-        border: 1px solid darken($light-gray, 5%);
-        border-radius: 1rem;
+        border-top: .2rem solid darken($light-gray, 5%);
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
         position: absolute;
         width: 100%;
         left: 0;
+        padding: 2.2rem;
+        padding-top: 3rem;
+        bottom: 0;
+        background-color: #fff;
+    }
+    &__selected-flex-container {
+        @media(min-width: $breakpoint2) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
     &__selected-label {
 
     }
     &__selected-text {
-
+        @extend %text-secondary;
+        margin: 0;
+        margin-bottom: 2.2rem;
+        @media(min-width: $breakpoint2) {
+            margin-bottom: 0;
+        }
     }
     &__selected-row {
-
+        display: flex;
+        align-items: center;
+        gap: 1.7rem;
+        justify-content: center;
     }
     &__selected-input {
+        border: .2rem solid darken($light-gray, 5%);
+        border-radius: 50rem;
+        padding-inline: 2rem;
+        padding-block: 1.5rem;
+        width: 10rem;
+        font-family: $font;
+        font-weight: bold;
+        font-size: min(3.73vw, 1.65rem);
+        text-align: center;
+        background-image: url(../images/dollar-currency-sign-svgrepo-com.svg);
+        background-position: left 25% center;
+        background-size: 1.65rem;
+        background-repeat: no-repeat;
+
+        &:focus {
+            outline-color: $moderate-cyan; 
+        }
 
     }
     &__selected-button {
-
+        @extend %button;
+        padding-inline: 2rem;
+        padding-block: 1.5rem;
     }
 }
