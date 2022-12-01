@@ -46,7 +46,8 @@
             <menu class="menu">
                 <button class="menu__button">Back this Project</button>
                 <button class="menu__bookmark">
-                    <img class="menu__bookmark-icon" src="./images/icon-bookmark.svg" alt="Bookmark">
+                    <!--<img class="menu__bookmark-icon" src="./images/icon-bookmark.svg" alt="Bookmark">-->
+                    <svg class="menu__bookmark-icon" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="currentColor" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
                     <p class="menu__bookmark-text">Bookmark</p>
                 </button>
             </menu>
@@ -160,8 +161,9 @@
     <section class="select-modal">
         <p class="select-modal__title">Back this project
         </p>
-        <button class="select-modal__close">
-            <img class="select-modal__close-icon" src="images/icon-close-modal.svg" alt="close">
+        <button class="select-modal__close" aria-label="close">
+            <!--<img class="select-modal__close-icon" src="images/icon-close-modal.svg" alt="close">-->
+            <svg class="select-modal__close-icon" width="15" height="15" xmlns="http://www.w3.org/2000/svg"><path d="M11.314 0l2.828 2.828L9.9 7.071l4.243 4.243-2.828 2.828L7.07 9.9l-4.243 4.243L0 11.314 4.242 7.07 0 2.828 2.828 0l4.243 4.242L11.314 0z" fill="currentColor" fill-rule="evenodd"/></svg>
         </button>
         <p class="select-modal__description">
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world
@@ -170,9 +172,9 @@
         
         <div class="select-modal__column">
 
-            <article class="select-reward" data-selected="false">
+            <article class="select-reward" data-selected="true">
                 <div class="select-reward__checkbox-container">
-                    <input class="select-reward__checkbox" type="checkbox" name="" id="generated1">
+                    <input  class="select-reward__checkbox" type="checkbox" name="" id="generated1">
                 </div>
                 <div class="select-reward__text-wrapper">
                     <label  class="select-reward__label" for="generated1">
@@ -194,7 +196,7 @@
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <div class="select-reward__selected-row">
-                            <input class="select-reward__selected-input" type="text" id="enter1">
+                            <input maxlength="4" class="select-reward__selected-input" type="text" id="enter1">
                             <button class="select-reward__selected-button">Continue</button>
                         </div>
                     </div>

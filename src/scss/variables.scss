@@ -31,6 +31,11 @@ $breakpoint2: 730px;
     font-size: min(3.73vw, 1.65rem);
     border-radius: 50rem;
     cursor: pointer;
+    transition: all 200ms;
+
+    &:hover {
+        background-color: $dark-cyan;
+    }
 }
 
 %text-primary {

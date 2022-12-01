@@ -13,6 +13,9 @@
         "q q q";
     row-gap: 2.4rem;
     column-gap: 1.7rem;
+    cursor: pointer;
+    transition: all 300ms;
+
     @media(min-width: $breakpoint2) {
         grid-template-areas: 
             "check text q"
@@ -28,6 +31,14 @@
             padding-bottom: 14rem;
         }
     }
+    &:hover {
+        .select-reward__checkbox {
+            border-color: $moderate-cyan;
+        }
+        .select-reward__title {
+            color: $moderate-cyan;
+        }
+    }
 
     &__checkbox-container {
         grid-area: check;
@@ -40,10 +51,11 @@
     &__checkbox {
         all: unset;
         display: block;
-        border:1px solid darken($light-gray, 5%);
+        border: .2rem solid darken($light-gray, 5%);
         width: 2.4rem;
         height: 2.4rem;
         border-radius: 50%;
+        transition: all 300ms;
 
         &::after {
             content: "";
@@ -85,7 +97,7 @@
         }
     }
     &__label {
-
+        cursor: pointer;
     }
     &__title {
         font-family: $font;
@@ -94,6 +106,7 @@
         width: max-content;
         font-size: min(3.6vw, 1.6rem);
         margin: 0;
+        transition: all 300ms;
     }
     &__pledge {
         font-family: $font;
@@ -147,6 +160,7 @@
         padding-top: 3rem;
         bottom: 0;
         background-color: #fff;
+        cursor: pointer;
     }
     &__selected-flex-container {
         @media(min-width: $breakpoint2) {
@@ -183,7 +197,7 @@
         font-size: min(3.73vw, 1.65rem);
         text-align: center;
         background-image: url(../images/dollar-currency-sign-svgrepo-com.svg);
-        background-position: left 25% center;
+        background-position: left 15% center;
         background-size: 1.65rem;
         background-repeat: no-repeat;
 

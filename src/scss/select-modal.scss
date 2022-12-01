@@ -26,6 +26,12 @@
     }
     &__close-icon {
         width: 1.5rem;
+        cursor: pointer;
+        color: $dark-gray;
+        transition: all 300ms;
+        &:hover {
+            color: #000;
+        }
     }
     &__description {
         @extend %text-secondary;

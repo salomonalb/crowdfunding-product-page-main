@@ -21,6 +21,10 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
+
+        &:hover .menu__bookmark-icon {
+            color: $dark-gray;
+        }
         @media(min-width: $breakpoint) {
             display: flex;
             align-items: center;
@@ -29,11 +33,12 @@
             gap: 2rem;
             padding-right: 2.5rem;
         }
-    
+        
         &-icon {
             display: block;
             width: 5.7rem;
             max-width: 100%;
+            transition: all 200ms;
         }
         &-text {
             display: none;
