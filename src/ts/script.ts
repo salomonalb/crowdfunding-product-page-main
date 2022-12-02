@@ -4,6 +4,7 @@ To do
 
 
 make clicking in the card activate the checkbox
+make the card 'clickable' with the keyboards
 make the cards behave like radio buttons
 make clicking again in card deactivate it
 make a card with quantity zero have a class to look inactive
@@ -19,7 +20,7 @@ reduce the quantity left by one,
 update the current amount and the lenght of the bar
 
 make clicking a specific reward focus that reward on the modal
-trap focus, trap scrolling.
+trap focus, trap scrolling. make modals appear in the center of the screen;
 
 
 
@@ -121,9 +122,9 @@ function rederProject(projectData) {
     projectData.rewards.forEach(reward => {
         const checkboxId = reward.title.replace(/\s+/g, '') + 'Check';
         const inputId = reward.title.replace(/\s+/g, '') + 'Input';
-        /*const cardId = reward.title.replace(/\s+/g, '') + 'Card';*/
+        const cardId = reward.title.replace(/\s+/g, '') + 'Card';
         const rewardElement = `
-        <article class="select-reward"  data-selected="false" tabindex="0">
+        <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
                 <div class="select-reward__checkbox-container">
                     <input  class="select-reward__checkbox" type="checkbox" name="" id="${checkboxId}">
                 </div>
@@ -153,17 +154,26 @@ function rederProject(projectData) {
                 </div>
             </article>
         `;
-
+        
         modalRewardsContainer.innerHTML += rewardElement;
         /*
-        const checkbox = document.querySelector(checkboxId) as HTMLInputElement;
-        const card = document.querySelector(cardId) as HTMLElement;
-
+        let checkbox = document.querySelector(`#${checkboxId}`) as HTMLInputElement;
+        let card = document.querySelector(`#${cardId}`) as HTMLElement;
+        alert(`here ${card}`);
         card.addEventListener('click', ()=> {
-            card.dataset.selected= "true";
-            checkbox.click()
+            alert(cardId)
+            if (!checkbox.checked) {
+                checkbox.checked = true;
+                card.dataset.selected = "true";   
+            } else if (checkbox.checked) {
+                checkbox.checked = false;
+                card.dataset.selected = "false";
+            }
+            
+            /* only the last card is working, it seems like the for each loop overwrites the event and only adds it to the last card 
         })
-*/
+        */
+        
     })
 
 }
@@ -200,8 +210,15 @@ const modalRewardCards = document.querySelectorAll('[data-selected]');
 modalRewardCards.forEach(element => {
 
     const rewardCard = element as HTMLElement;
+    const checkbox  = rewardCard.querySelector('.select-reward__checkbox') as HTMLInputElement;
     rewardCard.addEventListener('click', ()=> {
-        rewardCard.dataset.selected= "true";
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            rewardCard.dataset.selected = "true";   
+        } else if (checkbox.checked) {
+            checkbox.checked = false;
+            rewardCard.dataset.selected = "false";
+        }
     })
 })
 
