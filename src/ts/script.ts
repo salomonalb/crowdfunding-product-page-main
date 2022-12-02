@@ -221,7 +221,8 @@ modalRewardCards.forEach((element, index, cardsArray) => {
                 if (card.id === rewardCard.id) {
                     return
                 }
-                card.dataset.selected = "false"
+                let cardEl = card as HTMLElement;
+                cardEl.dataset.selected = "false"
             })
         } else if (checkbox.checked) {
             checkbox.checked = false;

@@ -172,9 +172,9 @@
             justify-content: space-between;
         }
     }
-    &__selected-label {
+    /*&__selected-label {
 
-    }
+    }*/
     &__selected-text {
         @extend %text-secondary;
         margin: 0;
