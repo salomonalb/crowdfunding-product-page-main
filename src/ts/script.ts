@@ -154,24 +154,6 @@ function rederProject(projectData) {
         `;
         
         modalRewardsContainer.innerHTML += rewardElement;
-        /*
-        let checkbox = document.querySelector(`#${checkboxId}`) as HTMLInputElement;
-        let card = document.querySelector(`#${cardId}`) as HTMLElement;
-        alert(`here ${card}`);
-        card.addEventListener('click', ()=> {
-            alert(cardId)
-            if (!checkbox.checked) {
-                checkbox.checked = true;
-                card.dataset.selected = "true";   
-            } else if (checkbox.checked) {
-                checkbox.checked = false;
-                card.dataset.selected = "false";
-            }
-            
-            /* only the last card is working, it seems like the for each loop overwrites the event and only adds it to the last card 
-        })
-        */
-        
     })
 
 }
