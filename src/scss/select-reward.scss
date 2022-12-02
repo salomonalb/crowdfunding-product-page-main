@@ -161,6 +161,9 @@
         bottom: 0;
         background-color: #fff;
         cursor: pointer;
+        [data-selected="true"] & {
+            display: block;
+        }
     }
     &__selected-flex-container {
         @media(min-width: $breakpoint2) {

@@ -13,6 +13,9 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%);
+    &[data-modalsuccess="true"] {
+        display: flex;
+    }
 
     &__icon {
         width: 6.4rem;
@@ -42,5 +45,8 @@
         height: 100%;
         background-color: transparentize($color: #000000, $amount: 0.6);
         z-index: 20;
+        &[data-modalsuccess="true"] {
+            display: block;
+        }
     }
 }

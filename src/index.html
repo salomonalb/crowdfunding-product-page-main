@@ -11,7 +11,6 @@
     <title>Crowdfunding Product Page</title>
 </head>
 <body>
-    <!-- navigation background -->
     <span class="nav__modal-background" id="nav-background" ></span>
     <header class="header">
         <nav class="nav" role="navigation">
@@ -43,7 +42,7 @@
             <h1 class="project-intro__title" id="title-el"></h1>
             <p class="project-intro__description" id="short-desc-el"></p>
             <menu class="menu">
-                <button class="menu__button">Back this Project</button>
+                <button class="menu__button" data-open-modal="true">Back this Project</button>
                 <button class="menu__bookmark">
                     <svg class="menu__bookmark-icon" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="currentColor" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
                     <p class="menu__bookmark-text">Bookmark</p>
@@ -84,11 +83,11 @@
         </section>
     </main>
 
-    <span class="select-modal__modal-background"></span>
-    <section class="select-modal">
+    <span class="select-modal__modal-background" id="select-modal-background" data-open="false"></span>
+    <section class="select-modal" id="select-modal" data-open="false">
         <p class="select-modal__title">Back this project
         </p>
-        <button class="select-modal__close" aria-label="close">
+        <button class="select-modal__close" aria-label="close" id="close-select-modal">
             <!--<img class="select-modal__close-icon" src="images/icon-close-modal.svg" alt="close">-->
             <svg class="select-modal__close-icon" width="15" height="15" xmlns="http://www.w3.org/2000/svg"><path d="M11.314 0l2.828 2.828L9.9 7.071l4.243 4.243-2.828 2.828L7.07 9.9l-4.243 4.243L0 11.314 4.242 7.07 0 2.828 2.828 0l4.243 4.242L11.314 0z" fill="currentColor" fill-rule="evenodd"/></svg>
         </button>
@@ -102,13 +101,13 @@
     </section>
 
 
-    <article class="success-modal">
+    <article class="success-modal" data-modalsuccess="false" id="sucm">
         <img class="success-modal__icon" src="./images/icon-check.svg" alt="">
         <p class="success-modal__title">Thanks for your support!</p>
         <p class="success-modal__description">Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
             an email once our campaign is completed.</p>
-        <button class="success-modal__button">Got it!</button>
+        <button class="success-modal__button" id="button-success">Got it!</button>
     </article>
-    <span class="success-modal__modal-background"></span>
+    <span class="success-modal__modal-background" data-modalsuccess="false" id="sucb"></span>
 </body>
 </html>

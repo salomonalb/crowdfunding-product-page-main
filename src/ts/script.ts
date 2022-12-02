@@ -73,7 +73,7 @@ function rederProject(projectData) {
                         <p class="reward__number">${reward.quantityLeft}</p>
                         <p class="reward__text">left</p>
                     </div>
-                    <button class="reward__button">Select Reward</button>
+                    <button class="reward__button" data-open-modal="true">Select Reward</button>
                 </div>
             </article>`;
 
@@ -108,7 +108,7 @@ function rederProject(projectData) {
                         </label>
                         <div class="select-reward__selected-row">
                             <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}">
-                            <button class="select-reward__selected-button">Continue</button>
+                            <button class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </div>
                     </div>
                 </div>
@@ -121,3 +121,60 @@ function rederProject(projectData) {
 }
 
 rederProject(projectData);
+
+const buttons = document.querySelectorAll('[data-open-modal="true"]');
+const selectModal = document.querySelector('#select-modal') as HTMLElement;
+const selectModalBackground = document.querySelector('#select-modal-background') as HTMLSpanElement;
+const closeButton = document.querySelector('#close-select-modal') as HTMLButtonElement;
+buttons.forEach(button => {
+    button.addEventListener('click', ()=> {
+        selectModal.dataset.open = "true";
+        selectModalBackground.dataset.open = "true";
+    })
+})
+
+selectModalBackground.addEventListener('click', ()=> {
+    selectModal.dataset.open = "false";
+    selectModalBackground.dataset.open = "false";
+})
+
+closeButton.addEventListener('click', ()=> {
+    selectModal.dataset.open = "false";
+    selectModalBackground.dataset.open = "false";
+})
+
+const modalRewardCards = document.querySelectorAll('[data-selected]');
+
+modalRewardCards.forEach(element => {
+
+    const rewardCard = element as HTMLElement;
+    rewardCard.addEventListener('click', ()=> {
+        rewardCard.dataset.selected= "true";
+    })
+})
+
+const openSuccessButtons = document.querySelectorAll('[data-opensuccess="true"]');
+
+const successModal = document.querySelector('#sucm') as HTMLElement ;
+const successBackground = document.querySelector('#sucb') as HTMLSpanElement;
+const buttonSuccess = document.querySelector('#button-success') as HTMLButtonElement;
+
+
+openSuccessButtons.forEach(button => {
+    button.addEventListener('click', ()=> {
+        selectModal.dataset.open = "false";
+        selectModalBackground.dataset.open = "false";
+        successBackground.dataset.modalsuccess = "true"
+        successModal.dataset.modalsuccess = "true";
+    })
+    })
+
+    successBackground.addEventListener('click', ()=> {
+        successModal.dataset.modalsuccess = "false";
+        successBackground.dataset.modalsuccess = "false";
+    })
+
+    buttonSuccess?.addEventListener('click', ()=> {
+        successModal.dataset.modalsuccess = "false";
+        successBackground.dataset.modalsuccess = "false";
+    })
