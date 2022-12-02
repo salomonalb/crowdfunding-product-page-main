@@ -43,8 +43,8 @@
             <p class="project-intro__description" id="short-desc-el"></p>
             <menu class="menu">
                 <button class="menu__button" data-open-modal="true">Back this Project</button>
-                <button class="menu__bookmark">
-                    <svg class="menu__bookmark-icon" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="currentColor" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
+                <button class="menu__bookmark" data-bookmarked="false" id="bookmark-button">
+                    <svg class="menu__bookmark-icon" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="currentColor" cx="28" cy="28" r="28"/><path class="menu__bookmark-icon-inside" fill="currentColor" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
                     <p class="menu__bookmark-text">Bookmark</p>
                 </button>
             </menu>
@@ -84,7 +84,7 @@
     </main>
 
     <span class="select-modal__modal-background" id="select-modal-background" data-open="false"></span>
-    <section class="select-modal" id="select-modal" data-open="false">
+    <section class="select-modal" id="select-modal" data-open="false" tabindex="0">
         <p class="select-modal__title">Back this project
         </p>
         <button class="select-modal__close" aria-label="close" id="close-select-modal">
@@ -101,7 +101,7 @@
     </section>
 
 
-    <article class="success-modal" data-modalsuccess="false" id="sucm">
+    <article class="success-modal" data-modalsuccess="false" id="sucm" tabindex="0">
         <img class="success-modal__icon" src="./images/icon-check.svg" alt="">
         <p class="success-modal__title">Thanks for your support!</p>
         <p class="success-modal__description">Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get

@@ -1,3 +1,36 @@
+/*
+
+To do
+
+
+make clicking in the card activate the checkbox
+make the cards behave like radio buttons
+make clicking again in card deactivate it
+make a card with quantity zero have a class to look inactive
+
+set the length of the bar depending on the percentange
+give tab index to reward cards to make them focusable
+
+
+validate the input numbers,
+add the amount to the object
+if the amount is above the minimun pledge, accept
+reduce the quantity left by one,
+update the current amount and the lenght of the bar
+
+make clicking a specific reward focus that reward on the modal
+trap focus, trap scrolling.
+
+
+
+
+*/
+
+
+
+
+
+
 
 const projectData = {
     "title": "Mastercraft Bamboo Monitor Riser", 
@@ -7,6 +40,11 @@ const projectData = {
         "p2": "Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer to allow notepads, pens, and USB sticks to be stored under the stand."
     },
     "isBookmarked": false,
+    set bookmark(boolParam: boolean) {
+        if ( typeof boolParam  === 'boolean') {
+            this.isBookmarked = boolParam;
+        }
+    },
     "backed": {
         "currentAmount": 89914,
         "totalBackers": 5007,
@@ -59,7 +97,7 @@ function rederProject(projectData) {
 
     projectData.rewards.forEach(reward => {
         const rewardElement = `
-        <article class="reward">
+        <article class="reward" tabindex="0">
                 <div class="reward__row-1">
                     <h3 class="reward__title">${reward.title}
                     </h3>
@@ -83,8 +121,9 @@ function rederProject(projectData) {
     projectData.rewards.forEach(reward => {
         const checkboxId = reward.title.replace(/\s+/g, '') + 'Check';
         const inputId = reward.title.replace(/\s+/g, '') + 'Input';
+        /*const cardId = reward.title.replace(/\s+/g, '') + 'Card';*/
         const rewardElement = `
-        <article class="select-reward" data-selected="false">
+        <article class="select-reward"  data-selected="false" tabindex="0">
                 <div class="select-reward__checkbox-container">
                     <input  class="select-reward__checkbox" type="checkbox" name="" id="${checkboxId}">
                 </div>
@@ -116,6 +155,15 @@ function rederProject(projectData) {
         `;
 
         modalRewardsContainer.innerHTML += rewardElement;
+        /*
+        const checkbox = document.querySelector(checkboxId) as HTMLInputElement;
+        const card = document.querySelector(cardId) as HTMLElement;
+
+        card.addEventListener('click', ()=> {
+            card.dataset.selected= "true";
+            checkbox.click()
+        })
+*/
     })
 
 }
@@ -130,6 +178,9 @@ buttons.forEach(button => {
     button.addEventListener('click', ()=> {
         selectModal.dataset.open = "true";
         selectModalBackground.dataset.open = "true";
+        let element = selectModal.firstElementChild as HTMLElement;
+        element.tabIndex = 0;
+        element.focus()
     })
 })
 
@@ -142,6 +193,7 @@ closeButton.addEventListener('click', ()=> {
     selectModal.dataset.open = "false";
     selectModalBackground.dataset.open = "false";
 })
+
 
 const modalRewardCards = document.querySelectorAll('[data-selected]');
 
@@ -166,6 +218,7 @@ openSuccessButtons.forEach(button => {
         selectModalBackground.dataset.open = "false";
         successBackground.dataset.modalsuccess = "true"
         successModal.dataset.modalsuccess = "true";
+        successModal.focus();
     })
     })
 
@@ -174,7 +227,23 @@ openSuccessButtons.forEach(button => {
         successBackground.dataset.modalsuccess = "false";
     })
 
-    buttonSuccess?.addEventListener('click', ()=> {
+    buttonSuccess.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
+    })
+
+
+    const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
+
+    bookmarkButton.addEventListener('click', () => {
+        if (projectData.isBookmarked) {
+            projectData.bookmark = false;
+            bookmarkButton.dataset.bookmarked = 'false';
+            return
+        }
+        if (!projectData.isBookmarked) {
+            projectData.bookmark = true;
+            bookmarkButton.dataset.bookmarked = 'true'
+            return
+        }
     })
