@@ -3,9 +3,11 @@
 To do
 
 
-make clicking in the card activate the checkbox
-make the card 'clickable' with the keyboards
 make the cards behave like radio buttons
+
+make the card 'clickable' with the keyboards
+
+
 make clicking again in card deactivate it
 make a card with quantity zero have a class to look inactive
 
@@ -126,7 +128,7 @@ function rederProject(projectData) {
         const rewardElement = `
         <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
                 <div class="select-reward__checkbox-container">
-                    <input  class="select-reward__checkbox" type="checkbox" name="" id="${checkboxId}">
+                    <input  class="select-reward__checkbox" type="radio" name="reward" id="${checkboxId}">
                 </div>
                 <div class="select-reward__text-wrapper">
                     <label  class="select-reward__label" for="${checkboxId}">
@@ -207,11 +209,26 @@ closeButton.addEventListener('click', ()=> {
 
 const modalRewardCards = document.querySelectorAll('[data-selected]');
 
-modalRewardCards.forEach(element => {
+modalRewardCards.forEach((element, index, cardsArray) => {
 
     const rewardCard = element as HTMLElement;
     const checkbox  = rewardCard.querySelector('.select-reward__checkbox') as HTMLInputElement;
     rewardCard.addEventListener('click', ()=> {
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            rewardCard.dataset.selected = "true";
+            cardsArray.forEach(card => {
+                if (card.id === rewardCard.id) {
+                    return
+                }
+                card.dataset.selected = "false"
+            })
+        } else if (checkbox.checked) {
+            checkbox.checked = false;
+            rewardCard.dataset.selected = "false";
+        }
+    })
+    checkbox.addEventListener('click', ()=> {
         if (!checkbox.checked) {
             checkbox.checked = true;
             rewardCard.dataset.selected = "true";   
