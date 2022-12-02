@@ -209,6 +209,7 @@ modalRewardCards.forEach((element, index, cardsArray) => {
 
     const rewardCard = element as HTMLElement;
     const checkbox  = rewardCard.querySelector('.select-reward__checkbox') as HTMLInputElement;
+    const amountInput = rewardCard.querySelector('.select-reward__selected-input') as HTMLInputElement;
     rewardCard.addEventListener('click', ()=> {
         if (!checkbox.checked) {
             checkbox.checked = true;
@@ -233,6 +234,9 @@ modalRewardCards.forEach((element, index, cardsArray) => {
             checkbox.checked = false;
             rewardCard.dataset.selected = "false";
         }
+    })
+    amountInput.addEventListener('click', (e)=> {
+        e.stopPropagation()
     })
 })
 
