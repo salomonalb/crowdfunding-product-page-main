@@ -2,13 +2,9 @@
 
 To do
 
-
-make the cards behave like radio buttons
-
 make the card 'clickable' with the keyboards
 
-
-make clicking again in card deactivate it
+make clicking on the inputs of the card while selected not close the card
 make a card with quantity zero have a class to look inactive
 
 set the length of the bar depending on the percentange
