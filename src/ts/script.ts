@@ -264,3 +264,11 @@ openSuccessButtons.forEach(button => {
             return
         }
     })
+
+    const forms = document.querySelectorAll('.select-reward__selected-row');
+
+    forms.forEach( form => {
+        form.addEventListener('submit', (e)=> {
+            e.preventDefault()
+        })
+    })
