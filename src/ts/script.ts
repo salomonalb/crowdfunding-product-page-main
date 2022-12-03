@@ -3,12 +3,6 @@
 To do
 
 
-conditionals to the render function for the quantity available and the corresponing style
-
-add the pledge with no reward option
-
-make a card with quantity zero have a class to look inactive
-
 set the length of the bar depending on the percentange
 give tab index to reward cards to make them focusable
 
@@ -56,6 +50,10 @@ const projectData = {
     "daysLeft": 56,
     "rewards": [
         {
+            "title": "Pledge with no reward",
+            "description": "Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up to receive product updates via email."
+        },
+        {
             "title": "Bamboo Stand",
             "description": "You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you'll be added to a special Backer member list.",
             "quantityLeft": 101,
@@ -100,7 +98,10 @@ function rederProject(projectData) {
 
     projectData.rewards.forEach(reward => {
         let rewardElement = '';
-        if (reward.quantityLeft <= 0) {
+
+        if (reward.hasOwnProperty("minimunPledge") === false) {
+            return
+        }else if (reward.quantityLeft <= 0) {
             rewardElement = `
             <article class="reward --unavailable" tabindex="0">
                     <div class="reward__row-1">
@@ -148,8 +149,37 @@ function rederProject(projectData) {
         const inputId = reward.title.replace(/\s+/g, '') + 'Input';
         const cardId = reward.title.replace(/\s+/g, '') + 'Card';
         let rewardElement = '';
-        
-        if (reward.quantityLeft <= 0) {
+        if (reward.hasOwnProperty("minimunPledge") === false) {
+            rewardElement = `
+        <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
+                <div class="select-reward__checkbox-container">
+                    <input  class="select-reward__checkbox" type="radio" name="reward" id="${checkboxId}">
+                </div>
+                <div class="select-reward__text-wrapper">
+                    <label  class="select-reward__label" for="${checkboxId}">
+                        <p class="select-reward__title">${reward.title}</p>
+                    </label>
+                </div>
+                <div class="select-reward__desc-wrapper">
+                    <p class="select-reward__description">${reward.description}</p>
+                </div>
+                <div class="select-reward__quantity-container">
+                </div>
+                <div class="select-reward__selected-menu">
+                    <div class="select-reward__selected-flex-container">
+                        <label class="select-reward__selected-label" for="${inputId}">
+                            <p class="select-reward__selected-text">Enter your pledge</p>
+                        </label>
+                        <form class="select-reward__selected-row">
+                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        `;
+        }
+        else if (reward.quantityLeft <= 0) {
             rewardElement = `
         <article class="select-reward --unavailable" id="${cardId}"  tabindex="0">
                 <div class="select-reward__checkbox-container">
