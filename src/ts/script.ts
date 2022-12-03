@@ -3,10 +3,6 @@
 To do
 
 
-set the length of the bar depending on the percentange
-give tab index to reward cards to make them focusable
-
-
 validate the input numbers,
 add the amount to the object
 if the amount is above the minimun pledge, accept
@@ -43,7 +39,7 @@ const projectData = {
         }
     },
     "backed": {
-        "currentAmount": 89914,
+        "currentAmount": 77914,
         "totalBackers": 5007,
         "objective": 100000
     },
@@ -370,3 +366,14 @@ openSuccessButtons.forEach(button => {
             e.preventDefault()
         })
     })
+
+    function percentangeCalc (projectData){
+
+        const percentange = ((projectData.backed.currentAmount * 100) / projectData.backed.objective);
+
+        const progressProgress = document.querySelector('#progress-progress') as HTMLDivElement;
+
+        progressProgress.style.width = `${percentange}%`
+    }
+
+    percentangeCalc(projectData);
