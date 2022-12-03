@@ -30,6 +30,9 @@
         @media(min-width: $breakpoint2) {
             padding-bottom: 14rem;
         }
+        .select-reward__checkbox {
+            border-color: $moderate-cyan;
+        }
     }
     &:hover {
         .select-reward__checkbox {
@@ -37,6 +40,18 @@
         }
         .select-reward__title {
             color: $moderate-cyan;
+        }
+    }
+    &.--unavailable {
+        opacity: .7;
+        cursor: not-allowed;
+        &:hover {
+            .select-reward__checkbox {
+                border-color: darken($light-gray, 5%);
+            }
+            .select-reward__title {
+                color: $dark-gray;
+            }
         }
     }
 
@@ -85,6 +100,9 @@
             opacity: 1;
             transform: translate(-50%, -50%);
         }
+        .--unavailable & {
+            pointer-events: none;
+        }
     }
     &__text-wrapper {
         display: flex;
@@ -98,6 +116,9 @@
     }
     &__label {
         cursor: pointer;
+        .--unavailable & {
+            pointer-events: none;
+        }
     }
     &__title {
         font-family: $font;
@@ -107,6 +128,9 @@
         font-size: min(3.6vw, 1.6rem);
         margin: 0;
         transition: all 300ms;
+        .--unavailable &  {
+            color: $dark-gray;
+        }
     }
     &__pledge {
         font-family: $font;
@@ -142,6 +166,9 @@
         width: max-content;
         font-size: min(3.7vw, 1.7rem);
         margin: 0;
+        .--unavailable &  {
+            color: $dark-gray;
+        }
     }
     &__text {
         @extend %text-secondary;

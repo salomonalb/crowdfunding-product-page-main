@@ -1,11 +1,13 @@
 @use './variables.scss' as *;
 
 .reward {
-    border: 1px solid darken($light-gray, 5%);
+    border: .2rem solid darken($light-gray, 5%);
     border-radius: 1rem;
     padding: 2.4rem;
     margin-bottom: 2.4rem;
-
+    &.--unavailable {
+        opacity: .7;
+    }
     .project-about__description + & {
         margin-top: 4rem;
     }
@@ -32,6 +34,9 @@
         width: max-content;
         font-size: min(3.73vw, 1.9rem);
         margin-bottom: 1.5rem;
+        .--unavailable & {
+            color: $dark-gray;
+        }
     }
     &__pledge {
         font-family: $font;
@@ -80,11 +85,20 @@
     &__button {
         @extend %button;
         align-self: stretch;
+        .--unavailable & {
+            background-color:$dark-gray;
+            color: white;
+            cursor:not-allowed;
+            pointer-events: none;
+        }
     }
     &__number {
         @extend %text-primary;
         font-size: 3.1rem;
         max-width: max-content;
+        .--unavailable & {
+            color: $dark-gray;
+        }
     }
     &__text {
         @extend %text-secondary;

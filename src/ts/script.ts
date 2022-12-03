@@ -99,7 +99,28 @@ function rederProject(projectData) {
     longDescriptionElement2.textContent = projectData.longDescription.p2;
 
     projectData.rewards.forEach(reward => {
-        const rewardElement = `
+        let rewardElement = '';
+        if (reward.quantityLeft <= 0) {
+            rewardElement = `
+            <article class="reward --unavailable" tabindex="0">
+                    <div class="reward__row-1">
+                        <h3 class="reward__title">${reward.title}
+                        </h3>
+                        <p class="reward__pledge">Pledge $${reward.minimunPledge} or more
+                        </p>
+                    </div>
+                    <p class="reward__description">${reward.description}</p>
+    
+                    <div class="reward__row-2">
+                        <div class="reward__row-3">
+                            <p class="reward__number">${reward.quantityLeft}</p>
+                            <p class="reward__text">left</p>
+                        </div>
+                        <button class="reward__button" data-open-modal="true">Out of Stock</button>
+                    </div>
+                </article>`;
+        } else {
+        rewardElement = `
         <article class="reward" tabindex="0">
                 <div class="reward__row-1">
                     <h3 class="reward__title">${reward.title}
@@ -117,15 +138,51 @@ function rederProject(projectData) {
                     <button class="reward__button" data-open-modal="true">Select Reward</button>
                 </div>
             </article>`;
-
+        }
         aboutSection.innerHTML += rewardElement;
+    
     });
 
     projectData.rewards.forEach(reward => {
         const checkboxId = reward.title.replace(/\s+/g, '') + 'Check';
         const inputId = reward.title.replace(/\s+/g, '') + 'Input';
         const cardId = reward.title.replace(/\s+/g, '') + 'Card';
-        const rewardElement = `
+        let rewardElement = '';
+        
+        if (reward.quantityLeft <= 0) {
+            rewardElement = `
+        <article class="select-reward --unavailable" id="${cardId}"  tabindex="0">
+                <div class="select-reward__checkbox-container">
+                    <input  class="select-reward__checkbox" type="radio" name="reward" id="${checkboxId}">
+                </div>
+                <div class="select-reward__text-wrapper">
+                    <label  class="select-reward__label" for="${checkboxId}">
+                        <p class="select-reward__title">${reward.title}</p>
+                    </label>
+                    <p class="select-reward__pledge">Pledge $${reward.minimunPledge} or more</p>
+                </div>
+                <div class="select-reward__desc-wrapper">
+                    <p class="select-reward__description">${reward.description}</p>
+                </div>
+                <div class="select-reward__quantity-container">
+                    <p class="select-reward__number">${reward.quantityLeft}</p>
+                    <p class="select-reward__text">left</p>
+                </div>
+                <div class="select-reward__selected-menu">
+                    <div class="select-reward__selected-flex-container">
+                        <label class="select-reward__selected-label" for="${inputId}">
+                            <p class="select-reward__selected-text">Enter your pledge</p>
+                        </label>
+                        <form class="select-reward__selected-row">
+                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        `;
+        } else {
+            rewardElement = `
         <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
                 <div class="select-reward__checkbox-container">
                     <input  class="select-reward__checkbox" type="radio" name="reward" id="${checkboxId}">
@@ -156,6 +213,9 @@ function rederProject(projectData) {
                 </div>
             </article>
         `;
+        }
+        
+        
         modalRewardsContainer.innerHTML += rewardElement;
     })
 
