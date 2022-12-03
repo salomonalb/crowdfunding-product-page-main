@@ -4,10 +4,10 @@ To do
 
 
 validate the input numbers,
+
 add the amount to the object
-if the amount is above the minimun pledge, accept
 reduce the quantity left by one,
-update the current amount and the lenght of the bar
+update and re render the current amount and the lenght of the bar
 
 make clicking a specific reward focus that reward on the modal
 trap focus, trap scrolling. make modals appear in the center of the screen;
@@ -15,6 +15,8 @@ make the inputs erase when you click another thing
 make the cards de-select when you get outside the modal
 make the card 'clickable' with the keyboards
 add commas to the ouput numbers
+
+on invalid input change the color of the entire card border, buttons, 
 
 
 */
@@ -175,7 +177,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="1">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
@@ -208,7 +210,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
@@ -240,7 +242,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
@@ -330,40 +332,6 @@ modalRewardCards.forEach((element, index, cardsArray) => {
 })
 
 
-/* i will have to erase this events, becuse the succes modal should not open on click but on "submit", */ 
-
-const openSuccessButtons = document.querySelectorAll('[data-opensuccess="true"]');
-
-const successModal = document.querySelector('#sucm') as HTMLElement ;
-const successBackground = document.querySelector('#sucb') as HTMLSpanElement;
-const buttonSuccess = document.querySelector('#button-success') as HTMLButtonElement;
-
-
-openSuccessButtons.forEach(button => {
-    button.addEventListener('click', ()=> {
-        selectModal.dataset.open = "false";
-        selectModalBackground.dataset.open = "false";
-        successBackground.dataset.modalsuccess = "true"
-        successModal.dataset.modalsuccess = "true";
-        successModal.focus();
-    })
-    })
-
-
-    /* ---------------------- */
-    /* close the succes modal */
-    successBackground.addEventListener('click', ()=> {
-        successModal.dataset.modalsuccess = "false";
-        successBackground.dataset.modalsuccess = "false";
-    })
-
-    buttonSuccess.addEventListener('click', ()=> {
-        successModal.dataset.modalsuccess = "false";
-        successBackground.dataset.modalsuccess = "false";
-    })
-
-
-
     /* get the bookmark button */
     const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
 
@@ -380,13 +348,56 @@ openSuccessButtons.forEach(button => {
             return
         }
     })
+
+/* i will have to erase this events, becuse the succes modal should not open on click but on "submit", */ 
+
+const openSuccessButtons = document.querySelectorAll('[data-opensuccess="true"]');
+
+const successModal = document.querySelector('#sucm') as HTMLElement ;
+const successBackground = document.querySelector('#sucb') as HTMLSpanElement;
+const buttonSuccess = document.querySelector('#button-success') as HTMLButtonElement;
+
+
+openSuccessButtons.forEach(button => {
+    button.addEventListener('click', (event)=> {
+        alert('button click')
+        event.stopPropagation()
+        /*
+        selectModal.dataset.open = "false";
+        selectModalBackground.dataset.open = "false";
+        successBackground.dataset.modalsuccess = "true"
+        successModal.dataset.modalsuccess = "true";
+        successModal.focus();
+        */
+    })
+    })
+
+
+    /* ---------------------- */
+    /* close the succes modal */
+    /*
+    successBackground.addEventListener('click', ()=> {
+        successModal.dataset.modalsuccess = "false";
+        successBackground.dataset.modalsuccess = "false";
+    })
+
+    buttonSuccess.addEventListener('click', ()=> {
+        successModal.dataset.modalsuccess = "false";
+        successBackground.dataset.modalsuccess = "false";
+    })
+    */
+
+
+
     /* get the forms inside the reward cards of the select modal */
     const forms = document.querySelectorAll('.select-reward__selected-row');
 
     /* prevent the submission of the form*/
     forms.forEach( form => {
         form.addEventListener('submit', (e)=> {
-            e.preventDefault()
+            alert('submit')
+
+
         })
     })
 
@@ -401,3 +412,15 @@ openSuccessButtons.forEach(button => {
     }
 
     percentangeCalc(projectData);
+
+
+    /* get the input numbers */
+    const inputs = document.querySelectorAll('input[type="number"]');
+    /* when you input data it doesn let you exceed 4 digits */
+    inputs.forEach(input => {
+        input.addEventListener('input', ()=> {
+            if (input.value.length > 4) {
+                input.value = input.value.slice(0,4); 
+            }
+        })
+    })
