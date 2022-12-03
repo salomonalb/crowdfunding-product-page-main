@@ -2,9 +2,11 @@
 
 To do
 
-make the card 'clickable' with the keyboards
 
-make clicking on the inputs of the card while selected not close the card
+conditionals to the render function for the quantity available and the corresponing style
+
+add the pledge with no reward option
+
 make a card with quantity zero have a class to look inactive
 
 set the length of the bar depending on the percentange
@@ -19,8 +21,10 @@ update the current amount and the lenght of the bar
 
 make clicking a specific reward focus that reward on the modal
 trap focus, trap scrolling. make modals appear in the center of the screen;
-
-
+make the inputs erase when you click another thing
+make the cards de-select when you get outside the modal
+make the card 'clickable' with the keyboards
+add commas to the ouput numbers
 
 
 */
@@ -152,7 +156,6 @@ function rederProject(projectData) {
                 </div>
             </article>
         `;
-        
         modalRewardsContainer.innerHTML += rewardElement;
     })
 
@@ -222,6 +225,9 @@ modalRewardCards.forEach((element, index, cardsArray) => {
     })
 })
 
+
+/* i will have to erase this events, becuse the succes modal should not open on click but on "submit", */ 
+
 const openSuccessButtons = document.querySelectorAll('[data-opensuccess="true"]');
 
 const successModal = document.querySelector('#sucm') as HTMLElement ;
@@ -239,6 +245,8 @@ openSuccessButtons.forEach(button => {
     })
     })
 
+
+    /* ---------------------- */
     successBackground.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
