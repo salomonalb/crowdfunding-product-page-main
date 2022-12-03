@@ -24,7 +24,7 @@ add commas to the ouput numbers
 
 
 
-
+/* project data*/
 const projectData = {
     "title": "Mastercraft Bamboo Monitor Riser", 
     "shortDescription": "A beautifully handcrafted monitor stand to reduce neck and eye strain.",
@@ -70,8 +70,10 @@ const projectData = {
     ]
 }
 
+/* Initial render of the proyect */
 function rederProject(projectData) {
 
+    /* Get the layout */
     const titleElement = document.querySelector('#title-el') as HTMLHeadingElement;
     const shortDescriptionElement = document.querySelector('#short-desc-el') as HTMLParagraphElement;
     const currentAmountElement = document.querySelector('#current-amount')  as HTMLParagraphElement;
@@ -83,6 +85,7 @@ function rederProject(projectData) {
     const aboutSection = document.querySelector('#about') as HTMLElement;
     const modalRewardsContainer = document.querySelector('#modal-rewards') as HTMLDivElement;
 
+    /* populate the layout with data */
     titleElement.textContent = projectData.title;
     shortDescriptionElement.textContent = projectData.shortDescription;
     currentAmountElement.textContent =`$${projectData.backed.currentAmount}`;
@@ -92,9 +95,11 @@ function rederProject(projectData) {
     longDescriptionElement1.textContent = projectData.longDescription.p1;
     longDescriptionElement2.textContent = projectData.longDescription.p2;
 
+    /* render each reward in the main page */
     projectData.rewards.forEach(reward => {
         let rewardElement = '';
 
+        /* if pledge withour reward, dont render, if reward with 0 quantity render with inactive class, else render normally */
         if (reward.hasOwnProperty("minimunPledge") === false) {
             return
         }else if (reward.quantityLeft <= 0) {
@@ -139,12 +144,15 @@ function rederProject(projectData) {
         aboutSection.innerHTML += rewardElement;
     
     });
-
+    /* render the rewards for the modal */
     projectData.rewards.forEach(reward => {
+        
+        /* create unique ids for each reward and its elements*/
         const checkboxId = reward.title.replace(/\s+/g, '') + 'Check';
         const inputId = reward.title.replace(/\s+/g, '') + 'Input';
         const cardId = reward.title.replace(/\s+/g, '') + 'Card';
         let rewardElement = '';
+        /* if pledge without reward, dont render some elements, if reward with quantity 0 render with inactive class else render normally */
         if (reward.hasOwnProperty("minimunPledge") === false) {
             rewardElement = `
         <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
@@ -247,12 +255,16 @@ function rederProject(projectData) {
 
 }
 
+/*call the render function */
 rederProject(projectData);
 
+/* get an array of buttons in the main page which will open the modal, get the modal, the modal background and the close button */
 const buttons = document.querySelectorAll('[data-open-modal="true"]');
 const selectModal = document.querySelector('#select-modal') as HTMLElement;
 const selectModalBackground = document.querySelector('#select-modal-background') as HTMLSpanElement;
 const closeButton = document.querySelector('#close-select-modal') as HTMLButtonElement;
+
+/* for each button add a event to open the modal and give it focus */
 buttons.forEach(button => {
     button.addEventListener('click', ()=> {
         selectModal.dataset.open = "true";
@@ -263,6 +275,7 @@ buttons.forEach(button => {
     })
 })
 
+/* for the background and the close button onckick close the modal */
 selectModalBackground.addEventListener('click', ()=> {
     selectModal.dataset.open = "false";
     selectModalBackground.dataset.open = "false";
@@ -273,14 +286,17 @@ closeButton.addEventListener('click', ()=> {
     selectModalBackground.dataset.open = "false";
 })
 
-
+/* get an array with the cards rewards in the modal */
 const modalRewardCards = document.querySelectorAll('[data-selected]');
 
+/* add the events */
 modalRewardCards.forEach((element, index, cardsArray) => {
 
+    /* get the card itself, the radio button and the input */
     const rewardCard = element as HTMLElement;
     const checkbox  = rewardCard.querySelector('.select-reward__checkbox') as HTMLInputElement;
     const amountInput = rewardCard.querySelector('.select-reward__selected-input') as HTMLInputElement;
+    /* add an event that if not checked checks the card and the radio and uncheks the other cards, behaving like radio buttons, if checked it simply uncheks */
     rewardCard.addEventListener('click', ()=> {
         if (!checkbox.checked) {
             checkbox.checked = true;
@@ -297,6 +313,7 @@ modalRewardCards.forEach((element, index, cardsArray) => {
             rewardCard.dataset.selected = "false";
         }
     })
+    /* make clicking on the radio buttons directly also activate the data attribute of the card */
     checkbox.addEventListener('click', ()=> {
         if (!checkbox.checked) {
             checkbox.checked = true;
@@ -306,6 +323,7 @@ modalRewardCards.forEach((element, index, cardsArray) => {
             rewardCard.dataset.selected = "false";
         }
     })
+    /* stop the propagation of the click so when you click the input it doesnt close the card*/
     amountInput.addEventListener('click', (e)=> {
         e.stopPropagation()
     })
@@ -333,6 +351,7 @@ openSuccessButtons.forEach(button => {
 
 
     /* ---------------------- */
+    /* close the succes modal */
     successBackground.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
@@ -344,8 +363,11 @@ openSuccessButtons.forEach(button => {
     })
 
 
+
+    /* get the bookmark button */
     const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
 
+    /* add the event to the button, to change the data-attribute and also modify the data inside the object */
     bookmarkButton.addEventListener('click', () => {
         if (projectData.isBookmarked) {
             projectData.bookmark = false;
@@ -358,15 +380,17 @@ openSuccessButtons.forEach(button => {
             return
         }
     })
-
+    /* get the forms inside the reward cards of the select modal */
     const forms = document.querySelectorAll('.select-reward__selected-row');
 
+    /* prevent the submission of the form*/
     forms.forEach( form => {
         form.addEventListener('submit', (e)=> {
             e.preventDefault()
         })
     })
 
+    /* a function that updates the width of the progreess bar in relation to the current amount backed in the project */
     function percentangeCalc (projectData){
 
         const percentange = ((projectData.backed.currentAmount * 100) / projectData.backed.objective);
