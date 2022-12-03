@@ -144,10 +144,10 @@ function rederProject(projectData) {
                         <label class="select-reward__selected-label" for="${inputId}">
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
-                        <div class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}">
-                            <button class="select-reward__selected-button" data-opensuccess="true">Continue</button>
-                        </div>
+                        <form class="select-reward__selected-row">
+                            <input maxlength="4" class="select-reward__selected-input" type="text" id="${inputId}" pattern="^[0-9]+$">
+                            <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
+                        </form>
                     </div>
                 </div>
             </article>
