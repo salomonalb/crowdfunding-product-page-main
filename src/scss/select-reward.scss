@@ -203,9 +203,11 @@
         background-position: left 15% center;
         background-size: 1.65rem;
         background-repeat: no-repeat;
-
         &:focus {
             outline-color: $moderate-cyan; 
+        }
+        &:invalid {
+            outline-color:red;
         }
 
     }
