@@ -177,7 +177,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="1">
+                            <input required class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="1">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
@@ -210,7 +210,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
+                            <input required class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
@@ -242,7 +242,7 @@ function rederProject(projectData) {
                             <p class="select-reward__selected-text">Enter your pledge</p>
                         </label>
                         <form class="select-reward__selected-row">
-                            <input maxlength="4" class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
+                            <input required class="select-reward__selected-input" type="number" id="${inputId}" max="9999" min="${reward.minimunPledge}">
                             <button type="submit" class="select-reward__selected-button" data-opensuccess="true">Continue</button>
                         </form>
                     </div>
