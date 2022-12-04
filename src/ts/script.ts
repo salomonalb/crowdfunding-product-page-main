@@ -329,6 +329,12 @@ modalRewardCards.forEach((element, index, cardsArray) => {
     amountInput.addEventListener('click', (e)=> {
         e.stopPropagation()
     })
+    /* if the numbers written exceed 4 digits, limit to 4 digits */
+    amountInput.addEventListener('input', (e)=> {
+        if (amountInput.value.length > 4) {
+            amountInput.value = amountInput.value.slice(0,4); 
+        }
+    })
 })
 
 
@@ -396,7 +402,7 @@ openSuccessButtons.forEach(button => {
     forms.forEach( form => {
         form.addEventListener('submit', (e)=> {
             alert('submit')
-
+            // grab the value of the input, convert it to number, add it to the data, open the modal, re render the specific parts of the ui,
 
         })
     })
@@ -413,14 +419,3 @@ openSuccessButtons.forEach(button => {
 
     percentangeCalc(projectData);
 
-
-    /* get the input numbers */
-    const inputs = document.querySelectorAll('input[type="number"]');
-    /* when you input data it doesn let you exceed 4 digits */
-    inputs.forEach(input => {
-        input.addEventListener('input', ()=> {
-            if (input.value.length > 4) {
-                input.value = input.value.slice(0,4); 
-            }
-        })
-    })
