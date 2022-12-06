@@ -2,9 +2,6 @@
 
 To do
 
-
-validate the input numbers,
-
 add the amount to the object
 reduce the quantity left by one,
 update and re render the current amount and the lenght of the bar
@@ -43,33 +40,68 @@ const projectData = {
     "backed": {
         "currentAmount": 77914,
         "totalBackers": 5007,
-        "objective": 100000
+        "objective": 100000,
+        increaseCurrentAmount(amount: number) {
+            alert(this.currentAmount)
+            this.currentAmount += amount;
+            alert(this.currentAmount)
+        },
+        increaseTotalBackers() {
+            alert(this.totalBackers)
+            this.totalBackers++
+            alert(this.totalBackers)
+        }
     },
     "daysLeft": 56,
     "rewards": [
         {
             "title": "Pledge with no reward",
-            "description": "Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up to receive product updates via email."
+            "description": "Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up to receive product updates via email.",
+            "minimunPledge": 1,
+            "quantityLeft": Infinity,
+            decreaseQuantity() {
+                alert(this.quantityLeft)
+                this.quantityLeft -= 1;
+                alert(this.quantityLeft)
+            }
         },
         {
             "title": "Bamboo Stand",
             "description": "You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you'll be added to a special Backer member list.",
             "quantityLeft": 101,
-            "minimunPledge": 25
+            "minimunPledge": 25,
+            decreaseQuantity() {
+                alert(this.quantityLeft)
+                this.quantityLeft -= 1;
+                alert(this.quantityLeft)
+            }
         },
         {
             "title": "Black Edition Stand",
             "description": "You get a Black Special Edition computer stand and a personal thank you. You'll be added to our Backer member list. Shipping is included.",
             "quantityLeft": 64,
-            "minimunPledge": 75
+            "minimunPledge": 75,
+            decreaseQuantity() {
+                alert(this.quantityLeft)
+                this.quantityLeft -= 1;
+                alert(this.quantityLeft)
+            }
         },
         {
             "title": "Mahogany Special Edition",
             "description": "You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You'll be added to our Backer member list. Shipping is included.",
             "quantityLeft": 0,
-            "minimunPledge": 200
+            "minimunPledge": 200,
+            decreaseQuantity() {
+                alert(this.quantityLeft)
+                this.quantityLeft -= 1;
+                alert(this.quantityLeft)
+            }
         }
-    ]
+    ],
+    pledge(quantity: number) {
+        // how to select the specific reward object depending on the form that calls the function? maybe make the function a method of the reward
+    }
 }
 
 /* Initial render of the proyect */
@@ -102,7 +134,7 @@ function rederProject(projectData) {
         let rewardElement = '';
 
         /* if pledge withour reward, dont render, if reward with 0 quantity render with inactive class, else render normally */
-        if (reward.hasOwnProperty("minimunPledge") === false) {
+        if (reward.minimunPledge === 1) {
             return
         }else if (reward.quantityLeft <= 0) {
             rewardElement = `
@@ -155,7 +187,7 @@ function rederProject(projectData) {
         const cardId = reward.title.replace(/\s+/g, '') + 'Card';
         let rewardElement = '';
         /* if pledge without reward, dont render some elements, if reward with quantity 0 render with inactive class else render normally */
-        if (reward.hasOwnProperty("minimunPledge") === false) {
+        if (reward.minimunPledge === 1) {
             rewardElement = `
         <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
                 <div class="select-reward__checkbox-container">
@@ -378,20 +410,29 @@ openSuccessButtons.forEach(button => {
     })
     })
 
+    function openSuccessModal() {
+        selectModal.dataset.open = "false";
+        selectModalBackground.dataset.open = "false";
+        successBackground.dataset.modalsuccess = "true"
+        successModal.dataset.modalsuccess = "true";
+        successModal.focus();
+    }
 
-    /* ---------------------- */
+    
     /* close the succes modal */
-    /*
+    
     successBackground.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
+        rederProject(projectData)
     })
 
     buttonSuccess.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
+        rederProject(projectData)
     })
-    */
+
 
 
 
@@ -401,8 +442,22 @@ openSuccessButtons.forEach(button => {
     /* prevent the submission of the form*/
     forms.forEach( form => {
         form.addEventListener('submit', (e)=> {
-            alert('submit')
-            // grab the value of the input, convert it to number, add it to the data, open the modal, re render the specific parts of the ui,
+            alert('submit');
+            //stop the form from submitting
+            e.preventDefault();
+            //get the input inside the form
+            const inputNumber = form.querySelector('input') as HTMLInputElement;
+            alert(inputNumber.value);
+            alert(inputNumber.min)
+            projectData.rewards.forEach(reward => {
+                //check if the minimun pldge is the same as the minumun attribute, because this means that the reward and its HTML representation match
+                if (Number(inputNumber.min) === reward.minimunPledge)    {
+                    projectData.backed.increaseCurrentAmount(Number(inputNumber.value))
+                    reward.decreaseQuantity()
+                    projectData.backed.increaseTotalBackers()
+            }
+        })
+            openSuccessModal()
 
         })
     })
