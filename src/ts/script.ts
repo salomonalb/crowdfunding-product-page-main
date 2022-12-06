@@ -2,19 +2,21 @@
 
 To do
 
-add the amount to the object
-reduce the quantity left by one,
-update and re render the current amount and the lenght of the bar
 
-make clicking a specific reward focus that reward on the modal
 trap focus, trap scrolling. make modals appear in the center of the screen;
-make the inputs erase when you click another thing
+
+make the inputs erase the value when you click another thing
+
 make the cards de-select when you get outside the modal
+
 make the card 'clickable' with the keyboards
 add commas to the ouput numbers
 
 on invalid input change the color of the entire card border, buttons, 
 
+make clicking a specific reward focus that reward on the modal
+
+add commas to the output numbers
 
 */
 
@@ -42,14 +44,10 @@ const projectData = {
         "totalBackers": 5007,
         "objective": 100000,
         increaseCurrentAmount(amount: number) {
-            alert(this.currentAmount)
             this.currentAmount += amount;
-            alert(this.currentAmount)
         },
         increaseTotalBackers() {
-            alert(this.totalBackers)
             this.totalBackers++
-            alert(this.totalBackers)
         }
     },
     "daysLeft": 56,
@@ -60,9 +58,7 @@ const projectData = {
             "minimunPledge": 1,
             "quantityLeft": Infinity,
             decreaseQuantity() {
-                alert(this.quantityLeft)
                 this.quantityLeft -= 1;
-                alert(this.quantityLeft)
             }
         },
         {
@@ -71,9 +67,7 @@ const projectData = {
             "quantityLeft": 101,
             "minimunPledge": 25,
             decreaseQuantity() {
-                alert(this.quantityLeft)
                 this.quantityLeft -= 1;
-                alert(this.quantityLeft)
             }
         },
         {
@@ -82,9 +76,7 @@ const projectData = {
             "quantityLeft": 64,
             "minimunPledge": 75,
             decreaseQuantity() {
-                alert(this.quantityLeft)
                 this.quantityLeft -= 1;
-                alert(this.quantityLeft)
             }
         },
         {
@@ -93,15 +85,10 @@ const projectData = {
             "quantityLeft": 0,
             "minimunPledge": 200,
             decreaseQuantity() {
-                alert(this.quantityLeft)
                 this.quantityLeft -= 1;
-                alert(this.quantityLeft)
             }
         }
-    ],
-    pledge(quantity: number) {
-        // how to select the specific reward object depending on the form that calls the function? maybe make the function a method of the reward
-    }
+    ]
 }
 
 /* Initial render of the proyect */
@@ -129,7 +116,16 @@ function rederProject(projectData) {
     longDescriptionElement1.textContent = projectData.longDescription.p1;
     longDescriptionElement2.textContent = projectData.longDescription.p2;
 
+    const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
+
+    if (projectData.isBookmarked) {
+        bookmarkButton.dataset.bookmarked = 'true';
+    } 
+    if (!projectData.isBookmarked) {
+        bookmarkButton.dataset.bookmarked = 'false'
+    }
     /* render each reward in the main page */
+    aboutSection.innerHTML = '';
     projectData.rewards.forEach(reward => {
         let rewardElement = '';
 
@@ -178,6 +174,8 @@ function rederProject(projectData) {
         aboutSection.innerHTML += rewardElement;
     
     });
+
+    modalRewardsContainer.innerHTML = '';
     /* render the rewards for the modal */
     projectData.rewards.forEach(reward => {
         
@@ -187,6 +185,7 @@ function rederProject(projectData) {
         const cardId = reward.title.replace(/\s+/g, '') + 'Card';
         let rewardElement = '';
         /* if pledge without reward, dont render some elements, if reward with quantity 0 render with inactive class else render normally */
+
         if (reward.minimunPledge === 1) {
             rewardElement = `
         <article class="select-reward" id="${cardId}" data-selected="false" tabindex="0">
@@ -287,12 +286,20 @@ function rederProject(projectData) {
         modalRewardsContainer.innerHTML += rewardElement;
     })
 
+    function percentangeCalc (projectData){
+
+        const percentange = ((projectData.backed.currentAmount * 100) / projectData.backed.objective);
+
+        const progressProgress = document.querySelector('#progress-progress') as HTMLDivElement;
+
+        progressProgress.style.width = `${percentange}%`
+    }
+
+    percentangeCalc(projectData);
 }
 
-/*call the render function */
-rederProject(projectData);
-
-/* get an array of buttons in the main page which will open the modal, get the modal, the modal background and the close button */
+function assignEvents() {
+    /* get an array of buttons in the main page which will open the modal, get the modal, the modal background and the close button */
 const buttons = document.querySelectorAll('[data-open-modal="true"]');
 const selectModal = document.querySelector('#select-modal') as HTMLElement;
 const selectModalBackground = document.querySelector('#select-modal-background') as HTMLSpanElement;
@@ -370,22 +377,9 @@ modalRewardCards.forEach((element, index, cardsArray) => {
 })
 
 
-    /* get the bookmark button */
-    const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
 
     /* add the event to the button, to change the data-attribute and also modify the data inside the object */
-    bookmarkButton.addEventListener('click', () => {
-        if (projectData.isBookmarked) {
-            projectData.bookmark = false;
-            bookmarkButton.dataset.bookmarked = 'false';
-            return
-        }
-        if (!projectData.isBookmarked) {
-            projectData.bookmark = true;
-            bookmarkButton.dataset.bookmarked = 'true'
-            return
-        }
-    })
+
 
 /* i will have to erase this events, becuse the succes modal should not open on click but on "submit", */ 
 
@@ -398,7 +392,6 @@ const buttonSuccess = document.querySelector('#button-success') as HTMLButtonEle
 
 openSuccessButtons.forEach(button => {
     button.addEventListener('click', (event)=> {
-        alert('button click')
         event.stopPropagation()
         /*
         selectModal.dataset.open = "false";
@@ -425,12 +418,14 @@ openSuccessButtons.forEach(button => {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
         rederProject(projectData)
+        assignEvents()
     })
 
     buttonSuccess.addEventListener('click', ()=> {
         successModal.dataset.modalsuccess = "false";
         successBackground.dataset.modalsuccess = "false";
         rederProject(projectData)
+        assignEvents()
     })
 
 
@@ -442,7 +437,6 @@ openSuccessButtons.forEach(button => {
     /* prevent the submission of the form*/
     forms.forEach( form => {
         form.addEventListener('submit', (e)=> {
-            alert('submit');
             //stop the form from submitting
             e.preventDefault();
             //get the input inside the form
@@ -462,15 +456,27 @@ openSuccessButtons.forEach(button => {
         })
     })
 
-    /* a function that updates the width of the progreess bar in relation to the current amount backed in the project */
-    function percentangeCalc (projectData){
 
-        const percentange = ((projectData.backed.currentAmount * 100) / projectData.backed.objective);
+}
 
-        const progressProgress = document.querySelector('#progress-progress') as HTMLDivElement;
+/*call the render function */
+rederProject(projectData);
 
-        progressProgress.style.width = `${percentange}%`
+assignEvents()
+
+    /* get the bookmark button */
+
+const bookmarkButton = document.querySelector('#bookmark-button') as HTMLButtonElement;
+bookmarkButton.addEventListener('click', () => {
+    if (projectData.isBookmarked) {
+        projectData.bookmark = false;
+        bookmarkButton.dataset.bookmarked = 'false';
+        return
     }
-
-    percentangeCalc(projectData);
+    if (!projectData.isBookmarked) {
+        projectData.bookmark = true;
+        bookmarkButton.dataset.bookmarked = 'true'
+        return
+    }
+})
 
