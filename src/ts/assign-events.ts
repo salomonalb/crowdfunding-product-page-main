@@ -7,6 +7,7 @@ const buttons = document.querySelectorAll('[data-open-modal="true"]');
 const selectModal = document.querySelector('#select-modal') as HTMLElement;
 const selectModalBackground = document.querySelector('#select-modal-background') as HTMLSpanElement;
 const closeButton = document.querySelector('#close-select-modal') as HTMLButtonElement;
+const modalRewardCards = document.querySelectorAll('[data-selected]');
 
 /* for each button add a event to open the modal and give it focus */
 buttons.forEach(button => {
@@ -31,7 +32,6 @@ closeButton.addEventListener('click', ()=> {
 })
 
 /* get an array with the cards rewards in the modal */
-const modalRewardCards = document.querySelectorAll('[data-selected]');
 
 /* add the events */
 modalRewardCards.forEach((element, index, cardsArray) => {
@@ -96,13 +96,6 @@ const buttonSuccess = document.querySelector('#button-success') as HTMLButtonEle
 openSuccessButtons.forEach(button => {
     button.addEventListener('click', (event)=> {
         event.stopPropagation()
-        /*
-        selectModal.dataset.open = "false";
-        selectModalBackground.dataset.open = "false";
-        successBackground.dataset.modalsuccess = "true"
-        successModal.dataset.modalsuccess = "true";
-        successModal.focus();
-        */
     })
     })
 
