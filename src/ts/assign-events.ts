@@ -137,8 +137,6 @@ openSuccessButtons.forEach(button => {
             e.preventDefault();
             //get the input inside the form
             const inputNumber = form.querySelector('input') as HTMLInputElement;
-            alert(inputNumber.value);
-            alert(inputNumber.min)
             projectData.rewards.forEach(reward => {
                 //check if the minimun pldge is the same as the minumun attribute, because this means that the reward and its HTML representation match
                 if (Number(inputNumber.min) === reward.minimunPledge)    {
